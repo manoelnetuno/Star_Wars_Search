@@ -5,8 +5,8 @@ import PlanetTable from './components/PlanetTable';
 function App() {
   return (
     <div>
+      <h1>Star Wars Planets Searching</h1>
       <PlanetTable />
-      <span>Hello, App!</span>
     </div>
   );
 }
