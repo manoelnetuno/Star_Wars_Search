@@ -1,20 +1,8 @@
 import { createContext } from 'react';
+import { PlanetzType } from './types/contextypes';
 
-export type PlanetzType = {
-  name: string;
-  climate: string;
-  terrain: string;
-  gravity: string;
-  diameter: string;
-  population: string;
-  orbital_period: string;
-  rotation_period: string;
-  surface_water: string;
-  films: string[];
-  created: string;
-  edited: string;
-  url: string;
+export type SWplanetzType = {
+  Planetzlistz: PlanetzType[];
 };
-
-const PlanetzContext = createContext({} as PlanetzType[]);
+const PlanetzContext = createContext({} as SWplanetzType);
 export default PlanetzContext;

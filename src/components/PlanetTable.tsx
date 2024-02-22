@@ -1,29 +1,16 @@
-import { useEffect, useState } from 'react';
-import { PlanetzType } from '../util/PlanetContext';
+import { useContext, useState } from 'react';
+import PlanetzContext from '../util/PlanetContext';
 
 export default function PlanetTable() {
-  const [planets, setPlanets] = useState([] as any as PlanetzType[]);
-  const [loading, setLoading] = useState(true);
+  const { Planetzlistz } = useContext(PlanetzContext);
   const [searchText, setSearchText] = useState('');
-
-  useEffect(() => {
-    fetch('https://swapi.dev/api/planets/')
-      .then((res) => res.json())
-      .then((data) => {
-        setPlanets(data.results);
-        setLoading(false);
-      });
-  }, []);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
   };
-  const filteredPlanets = planets.filter((planet) => {
+  const filteredPlanetz = Planetzlistz.filter((planet) => {
     return planet.name.toLowerCase().includes(searchText.toLowerCase());
   });
-  if (loading) {
-    return <span>Loading...</span>;
-  }
 
   return (
     <div>
@@ -53,7 +40,7 @@ export default function PlanetTable() {
           </tr>
         </thead>
         <tbody>
-          {filteredPlanets.map((planet) => (
+          {filteredPlanetz.map((planet) => (
             <tr key={ planet.name }>
               <td>{planet.name}</td>
               <td>{planet.climate}</td>
@@ -64,7 +51,11 @@ export default function PlanetTable() {
               <td>{planet.orbital_period}</td>
               <td>{planet.rotation_period}</td>
               <td>{planet.surface_water}</td>
-              <td>{planet.films}</td>
+              <td>
+                {planet.films.map((film:any) => (
+                  <p key={ film }>{film}</p>
+                ))}
+              </td>
               <td>{planet.created}</td>
               <td>{planet.edited}</td>
               <td>{planet.url}</td>
