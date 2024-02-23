@@ -14,11 +14,11 @@ function PlanetzProvider({ children }: PlanetzProviderProps) {
       const url = 'https://swapi.dev/api/planets';
       const response = await fetch(url);
       const result = await response.json();
-      const planets = result.results.map((planet: any) => {
+      const planetz = result.results.map((planet: any) => {
         const { residents, ...notResidents } = planet;
         return notResidents;
       });
-      setPlanetzListz(planets);
+      setPlanetzListz(planetz);
     };
     fetchApi();
   }, []);

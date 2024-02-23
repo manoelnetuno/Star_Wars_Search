@@ -1,26 +1,21 @@
 import { useContext, useState } from 'react';
 import PlanetzContext from '../util/PlanetContext';
+import PlanetzSearch from './SearchFilter';
 
 export default function PlanetTable() {
   const { Planetzlistz } = useContext(PlanetzContext);
-  const [searchText, setSearchText] = useState('');
+  const [filteredPlanetz, setFilteredPlanetz] = useState(Planetzlistz);
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
+  const handleFilter = (searchText: string) => {
+    const filtered = Planetzlistz.filter((planet) => {
+      return planet.name.toLowerCase().includes(searchText.toLowerCase());
+    });
+    setFilteredPlanetz(filtered);
   };
-  const filteredPlanetz = Planetzlistz.filter((planet) => {
-    return planet.name.toLowerCase().includes(searchText.toLowerCase());
-  });
 
   return (
     <div>
-      <input
-        data-testid="name-filter"
-        type="text"
-        placeholder="Search Planets..."
-        value={ searchText }
-        onChange={ handleSearch }
-      />
+      <PlanetzSearch onfilter={ handleFilter } />
       <table>
         <thead>
           <tr>
