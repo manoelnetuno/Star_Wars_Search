@@ -28,17 +28,16 @@ function PlanetzProvider({ children }: PlanetzProviderProps) {
   }, []);
   const AllValues = ({ columnz, comparison, value }: any) => {
     const comparator = (planet: any) => {
-      switch (comparison) {
-        case 'maior que':
-          return Number(planet[columnz]) > value;
-        case 'menor que':
-          return Number(planet[columnz]) < value;
-        default:
-          return Number(planet[columnz]) === Number(value);
+      if (comparison === 'maior que') {
+        return Number(planet[columnz]) > value;
+      } if (comparison === 'menor que') {
+        return Number(planet[columnz]) < value;
       }
+      return Number(planet[columnz]) === Number(value);
     };
     return Planetzlistz.filter(comparator);
   };
+
   const ComparasionFilter = () => {
     setPlanetzListz(AllValues(QuantityFilter));
   };
