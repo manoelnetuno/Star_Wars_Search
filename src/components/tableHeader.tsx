@@ -1,6 +1,6 @@
 function TableHeader() {
   return (
-    <thead>
+    <thead className="style-table">
       <tr>
         <th>Name</th>
         <th>Climate</th>
