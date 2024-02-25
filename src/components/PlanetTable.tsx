@@ -4,7 +4,6 @@ import PlanetzSearch from './SearchFilter';
 import TableHeader from './tableHeader';
 import SelectFilter from './SelectFilter';
 
-
 export default function PlanetTable() {
   const { Planetzlistz } = useContext(PlanetzContext);
   const [filteredPlanetz, setFilteredPlanetz] = useState(Planetzlistz);
