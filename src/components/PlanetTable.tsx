@@ -17,13 +17,49 @@ export default function PlanetTable() {
   };
   if (filteredPlanetz.length > 0) {
     return (
-      <div>
-        <PlanetzSearch onfilter={ handleFilter } />
-        <SelectFilter />
-        <table>
-          <TableHeader />
+      <div data-testid="planet-table">
+        <PlanetzSearch data-testid="planetz-search" onfilter={ handleFilter } />
+        <SelectFilter data-testid="select-filter" />
+        <div data-testid="filtered-planetz">
+          <table data-testid="table">
+            <TableHeader data-testid="table-header" />
+            <tbody>
+              {filteredPlanetz.map((planet) => (
+                <tr key={ planet.name }>
+                  <td>{planet.name}</td>
+                  <td>{planet.climate}</td>
+                  <td>{planet.terrain}</td>
+                  <td>{planet.gravity}</td>
+                  <td>{planet.diameter}</td>
+                  <td>{planet.population}</td>
+                  <td>{planet.orbital_period}</td>
+                  <td>{planet.rotation_period}</td>
+                  <td>{planet.surface_water}</td>
+                  <td>
+                    {planet.films.map((film:any) => (
+                      <p key={ film }>{film}</p>
+                    ))}
+                  </td>
+                  <td>{planet.created}</td>
+                  <td>{planet.edited}</td>
+                  <td>{planet.url}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div data-testid="planet-table">
+      <PlanetzSearch data-testid="planetz-search" onfilter={ handleFilter } />
+      <SelectFilter data-testid="select-filter" />
+      <div data-testid="filtered-planetz">
+        <table data-testid="table">
+          <TableHeader data-testid="table-header" />
           <tbody>
-            {filteredPlanetz.map((planet) => (
+            {Planetzlistz.map((planet) => (
               <tr key={ planet.name }>
                 <td>{planet.name}</td>
                 <td>{planet.climate}</td>
@@ -45,41 +81,9 @@ export default function PlanetTable() {
               </tr>
             ))}
           </tbody>
+
         </table>
       </div>
-    );
-  }
-  return (
-    <div>
-      <PlanetzSearch onfilter={ handleFilter } />
-      <SelectFilter />
-      <table>
-        <TableHeader />
-        <tbody>
-          {Planetzlistz.map((planet) => (
-            <tr key={ planet.name }>
-              <td>{planet.name}</td>
-              <td>{planet.climate}</td>
-              <td>{planet.terrain}</td>
-              <td>{planet.gravity}</td>
-              <td>{planet.diameter}</td>
-              <td>{planet.population}</td>
-              <td>{planet.orbital_period}</td>
-              <td>{planet.rotation_period}</td>
-              <td>{planet.surface_water}</td>
-              <td>
-                {planet.films.map((film:any) => (
-                  <p key={ film }>{film}</p>
-                ))}
-              </td>
-              <td>{planet.created}</td>
-              <td>{planet.edited}</td>
-              <td>{planet.url}</td>
-            </tr>
-          ))}
-        </tbody>
-
-      </table>
     </div>
   );
 }

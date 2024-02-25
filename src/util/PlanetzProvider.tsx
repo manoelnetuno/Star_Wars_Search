@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import PlanetzContext from './PlanetContext';
 import { PlanetzType } from './types/contextypes';
+import { QuantityFilterType } from './types/Quantityfilter';
 
 type PlanetzProviderProps = {
   children: React.ReactNode;
@@ -8,11 +9,8 @@ type PlanetzProviderProps = {
 
 function PlanetzProvider({ children }: PlanetzProviderProps) {
   const [Planetzlistz, setPlanetzListz] = useState<PlanetzType[]>([]);
-  const [QuantityFilter, setQuantityFilter] = useState(
-    { column: 'population',
-      comparison: 'maior que',
-      value: '0' },
-  );
+  const [Planetzstate, setPlanetzState] = useState<PlanetzType[]>([]);
+  const [QuantityFilter, setQuantityFilter] = useState([] as QuantityFilterType[]);
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -24,36 +22,42 @@ function PlanetzProvider({ children }: PlanetzProviderProps) {
         return notResidents;
       });
       setPlanetzListz(planetz);
+      setPlanetzState(planetz);
       console.log(planetz);
     };
     fetchApi();
   }, []);
-  const AllValues = () => {
-    const { column, comparison, value } = QuantityFilter;
-    console.log(comparison, value);
-    switch (comparison) {
-      case 'maior que':
-        return Planetzlistz.filter(
-          (planet:any) => Number(planet[column]) > Number(value),
-        );
-      case 'menor que':
-        return Planetzlistz.filter(
-          (planet:any) => Number(planet[column]) < Number(value),
-        );
-      default:
-        return Planetzlistz.filter(
-          (planet:any) => (Number(planet[column]) === Number(value)),
-        );
-    }
+  const AllValues = (original:PlanetzType[], filtros:QuantityFilterType[]) => {
+    let arr = original;
+    filtros.forEach((filter) => {
+      arr = arr.filter((planet) => {
+        const { column, comparison, value } = filter;
+        console.log(comparison, value);
+        switch (comparison) {
+          case 'maior que':
+            return Number(planet[column as keyof PlanetzType]) > Number(value);
+          case 'menor que':
+            return Number(planet[column as keyof PlanetzType]) < Number(value);
+          case 'igual a':
+            return Number(planet[column as keyof PlanetzType]) === Number(value);
+          default:
+            return false;
+        }
+      });
+    });
+    return arr;
   };
 
   const ComparasionFilter = () => {
-    const filter = AllValues();
-    setPlanetzListz(filter);
+    const Numberfilter = AllValues(Planetzstate, QuantityFilter);
+    setPlanetzListz(Numberfilter);
   };
+  useEffect(() => {
+    ComparasionFilter();
+  }, [QuantityFilter]);
   return (
     <PlanetzContext.Provider
-      value={ { Planetzlistz, QuantityFilter, ComparasionFilter, setQuantityFilter } }
+      value={ { Planetzlistz, QuantityFilter, setQuantityFilter } }
     >
       <div>
         {children}

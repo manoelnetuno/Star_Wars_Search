@@ -4,9 +4,8 @@ import { QuantityFilterType } from './types/Quantityfilter';
 
 export type SWplanetzType = {
   Planetzlistz: PlanetzType[];
-  QuantityFilter: QuantityFilterType;
+  QuantityFilter: QuantityFilterType[];
   setQuantityFilter: any
-  ComparasionFilter: (filter: QuantityFilterType) => void;
 };
 const PlanetzContext = createContext({} as SWplanetzType);
 export default PlanetzContext;

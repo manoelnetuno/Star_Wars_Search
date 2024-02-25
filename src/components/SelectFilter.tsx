@@ -1,10 +1,10 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import PlanetzContext from '../util/PlanetContext';
+import { QuantityFilterType } from '../util/types/Quantityfilter';
 
 const columnsOptions = [
   'population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water',
 ];
-
 const operatorOption = [
   'maior que', 'menor que', 'igual a',
 ];
@@ -12,16 +12,22 @@ const operatorOption = [
 function SelectFilter() {
   const {
     QuantityFilter,
-    ComparasionFilter,
     setQuantityFilter,
   } = useContext(PlanetzContext);
+  const [form, setForm] = useState<QuantityFilterType>(
+    {
+      column: columnsOptions[0],
+      comparison: 'maior que',
+      value: '0',
+    },
+  );
 
   const handleSubmit = () => {
-    ComparasionFilter(QuantityFilter);
+    setQuantityFilter([...QuantityFilter, form]);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
-    setQuantityFilter({ ...QuantityFilter, value: (e.target.value) });
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   return (
@@ -30,10 +36,7 @@ function SelectFilter() {
       <select
         id="column"
         name="column"
-        value={ QuantityFilter.column }
-        onChange={ ({ target }) => setQuantityFilter(
-          { ...QuantityFilter, column: target.value },
-        ) }
+        onChange={ handleChange }
         data-testid="column-filter"
       >
         {columnsOptions.map((option:any) => (
@@ -50,9 +53,7 @@ function SelectFilter() {
         name="comparison"
         id="comparison"
         data-testid="comparison-filter"
-        onChange={ ({ target }) => setQuantityFilter(
-          { ...QuantityFilter, comparison: target.value },
-        ) }
+        onChange={ handleChange }
       >
         {operatorOption.map((option) => (
           <option
@@ -66,7 +67,7 @@ function SelectFilter() {
       <input
         type="number"
         name="value"
-        value={ QuantityFilter.value }
+        value={ form.value }
         onChange={ handleChange }
         data-testid="value-filter"
       />
