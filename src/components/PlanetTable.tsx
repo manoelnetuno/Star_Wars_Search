@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import PlanetzContext from '../util/PlanetContext';
 import PlanetzSearch from './SearchFilter';
 import TableHeader from './tableHeader';
+import SelectFilter from './SelectFilter';
 
 export default function PlanetTable() {
   const { Planetzlistz } = useContext(PlanetzContext);
@@ -18,6 +19,7 @@ export default function PlanetTable() {
     return (
       <div>
         <PlanetzSearch onfilter={ handleFilter } />
+        <SelectFilter />
         <table>
           <TableHeader />
           <tbody>
@@ -50,6 +52,7 @@ export default function PlanetTable() {
   return (
     <div>
       <PlanetzSearch onfilter={ handleFilter } />
+      <SelectFilter />
       <table>
         <TableHeader />
         <tbody>
