@@ -11,9 +11,6 @@ function PlanetzProvider({ children }: PlanetzProviderProps) {
   const [Planetzlistz, setPlanetzListz] = useState<PlanetzType[]>([]);
   const [Planetzstate, setPlanetzState] = useState<PlanetzType[]>([]);
   const [QuantityFilter, setQuantityFilter] = useState([] as QuantityFilterType[]);
-  const [availableColumns, setAvailableColumns] = useState(
-    ['population', 'orbital_period', 'diameter', 'rotation_period', 'surface_water'],
-  );
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -26,7 +23,6 @@ function PlanetzProvider({ children }: PlanetzProviderProps) {
       });
       setPlanetzListz(planetz);
       setPlanetzState(planetz);
-      setAvailableColumns(Object.keys(result.results[0]));
       console.log(planetz);
     };
     fetchApi();
