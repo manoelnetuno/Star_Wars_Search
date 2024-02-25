@@ -3,7 +3,7 @@ import PlanetzContext from '../util/PlanetContext';
 import PlanetzSearch from './SearchFilter';
 import TableHeader from './tableHeader';
 import SelectFilter from './SelectFilter';
-import '../table.css';
+
 
 export default function PlanetTable() {
   const { Planetzlistz } = useContext(PlanetzContext);
