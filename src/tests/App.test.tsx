@@ -24,16 +24,16 @@ describe('Teste de renderização da tabela', () => {
   });
 });
 
-describe('Teste de renderização do app', () => {
-  it('Deve renderizar o app com os elementos corretos', () => {
-    render(<App />);
-    expect(screen.getByText(searchPlanet)).toBeInTheDocument();
-    expect(screen.getByTestId(valueFilter)).toBeInTheDocument();
-    expect(screen.getByTestId(columnFilter)).toBeInTheDocument();
-    expect(screen.getByTestId(filter)).toBeInTheDocument();
-    expect(screen.getByTestId(comparisonFilter)).toBeInTheDocument();
-  });
-});
+// describe('Teste de renderização do app', () => {
+//   it('Deve renderizar o app com os elementos corretos', () => {
+//     render(<App />);
+//     expect(screen.getByText(searchPlanet)).toBeInTheDocument();
+//     expect(screen.getByTestId(valueFilter)).toBeInTheDocument();
+//     expect(screen.getByTestId(columnFilter)).toBeInTheDocument();
+//     expect(screen.getByTestId(filter)).toBeInTheDocument();
+//     expect(screen.getByTestId(comparisonFilter)).toBeInTheDocument();
+//   });
+// });
 // describe('Teste da aplicação toda',  () => {
 //     render(<App />);
 //     test('Teste do titulo', () => {

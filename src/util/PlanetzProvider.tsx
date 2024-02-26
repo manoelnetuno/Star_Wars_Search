@@ -11,6 +11,7 @@ function PlanetzProvider({ children }: PlanetzProviderProps) {
   const [Planetzlistz, setPlanetzListz] = useState<PlanetzType[]>([]);
   const [Planetzstate, setPlanetzState] = useState<PlanetzType[]>([]);
   const [QuantityFilter, setQuantityFilter] = useState([] as QuantityFilterType[]);
+  const [Order, setOrder] = useState({ column: 'name', sort: 'ASC' });
 
   useEffect(() => {
     const fetchApi = async () => {
@@ -57,7 +58,7 @@ function PlanetzProvider({ children }: PlanetzProviderProps) {
   }, [QuantityFilter]);
   return (
     <PlanetzContext.Provider
-      value={ { Planetzlistz, QuantityFilter, setQuantityFilter } }
+      value={ { Planetzlistz, QuantityFilter, setQuantityFilter, setOrder } }
     >
       <div>
         {children}
@@ -65,5 +66,4 @@ function PlanetzProvider({ children }: PlanetzProviderProps) {
     </PlanetzContext.Provider>
   );
 }
-
 export default PlanetzProvider;

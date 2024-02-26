@@ -1,11 +1,12 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import PlanetTable from '../components/PlanetTable';
+import PlanetzProvider from '../util/PlanetzProvider';
 
 describe('PlanetTable component', () => {
   it('renders PlanetzSearch inside the div', () => {
-    const { getByTestId } = render(<PlanetTable />);
-    const planetSearchComponent = getByTestId('planetz-search');
+    const { getByTestId } = render(<PlanetzProvider><PlanetTable /></PlanetzProvider>);
+    const planetSearchComponent = getByTestId('name-filter');
     const tableElement = getByTestId('planet-table');
 
     // Check if the PlanetzSearch component is inside the div
