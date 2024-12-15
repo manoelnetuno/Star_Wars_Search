@@ -16,7 +16,7 @@ function SelectFilter() {
   } = useContext(PlanetzContext);
   const [form, setForm] = useState<QuantityFilterType>(
     {
-      column: columnsOptions[0],
+      column: 'population',
       comparison: 'maior que',
       value: '0',
     },

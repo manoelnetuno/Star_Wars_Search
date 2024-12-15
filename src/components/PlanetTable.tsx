@@ -18,7 +18,7 @@ export default function PlanetTable() {
   if (filteredPlanetz.length > 0) {
     return (
       <div data-testid="planet-table">
-        <PlanetzSearch data-testid="planetz-search" onfilter={ handleFilter } />
+        <PlanetzSearch onfilter={ handleFilter } />
         <SelectFilter data-testid="select-filter" />
         <div data-testid="filtered-planetz">
           <table className="styleTable" data-testid="table">
